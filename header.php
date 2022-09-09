@@ -9,6 +9,7 @@
  * @package groundwork-2
  */
 
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -28,8 +29,13 @@
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
 			<?php
+
 			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
+			if (
+				( is_front_page() && is_home() )
+				||
+				( get_post_meta( get_the_ID(), 'is_home', true ) == 'true' )
+			) :
 				?>
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<?php
@@ -48,10 +54,12 @@
 		<nav id="site-navigation" class="main-navigation">
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'groundwork-2' ); ?></button>
 			<?php
+
 			wp_nav_menu(
 				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
+					'theme_location'	=>	'menu-1',
+					'menu_id'       	=>	'primary-menu',
+					'menu_class'			=>	cfg('NAV_CLASS', true),
 				)
 			);
 			?>

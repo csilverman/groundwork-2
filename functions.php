@@ -1,9 +1,7 @@
 <?php
 
 define('HOMEPAGE__CPT_ARCHIVE', 'note');
-
-
-
+define('NAV_CLASS', 'primary-menu');
 
 
 /**
@@ -221,6 +219,21 @@ function cfg($setting, $get_value = false, $default = '') {
 }
 
 
+
+
+/*	POSTS
+		===== */
+
+function css() {
+	
+}
+
+
+/*	DEV STUFF
+		========= */
+
+/*	Filters
+		------- */
 
 
 
