@@ -13,10 +13,12 @@ if ( ! function_exists( 'groundwork_2_posted_on' ) ) :
 	 */
 	function groundwork_2_posted_on() {
 		$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-		if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-			$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
-		}
 
+		if( cfg( 'POST__SHOW_MOD_TIME', true) ) {
+			if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+				$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+			}
+		}
 		$time_string = sprintf(
 			$time_string,
 			esc_attr( get_the_date( DATE_W3C ) ),
@@ -25,9 +27,11 @@ if ( ! function_exists( 'groundwork_2_posted_on' ) ) :
 			esc_html( get_the_modified_date() )
 		);
 
+		$posted_on_string = cfg( 'POST__POSTED_ON_STRING', true, '');
+
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'groundwork-2' ),
+			esc_html_x( $posted_on_string.' %s', 'post date', 'groundwork-2' ),
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
@@ -41,14 +45,15 @@ if ( ! function_exists( 'groundwork_2_posted_by' ) ) :
 	 * Prints HTML with meta information for the current author.
 	 */
 	function groundwork_2_posted_by() {
-		$byline = sprintf(
-			/* translators: %s: post author. */
-			esc_html_x( 'by %s', 'post author', 'groundwork-2' ),
-			'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
-		);
+		if( cfg( 'POST__SHOW_AUTHOR', true) ) {
+			$byline = sprintf(
+				/* translators: %s: post author. */
+				esc_html_x( 'by %s', 'post author', 'groundwork-2' ),
+				'<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+			);
 
-		echo '<span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
+			echo '<span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
 	}
 endif;
 

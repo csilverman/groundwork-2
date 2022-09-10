@@ -3,6 +3,10 @@
 define('HOMEPAGE__CPT_ARCHIVE', 'note');
 define('NAV_CLASS', 'primary-menu');
 
+define('POST__SHOW_MOD_TIME', false);
+define('POST__SHOW_AUTHOR', false);
+
+
 
 /**
  * groundwork-2 functions and definitions
@@ -225,7 +229,7 @@ function cfg($setting, $get_value = false, $default = '') {
 		===== */
 
 function css() {
-	
+
 }
 
 
