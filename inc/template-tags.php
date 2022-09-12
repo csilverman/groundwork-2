@@ -65,17 +65,20 @@ if ( ! function_exists( 'groundwork_2_entry_footer' ) ) :
 		// Hide category and tag text for pages.
 		if ( 'post' === get_post_type() ) {
 			/* translators: used between list items, there is a space after the comma */
-			$categories_list = get_the_category_list( esc_html__( ', ', 'groundwork-2' ) );
-			if ( $categories_list ) {
-				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'groundwork-2' ) . '</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			if( cfg('POST__SHOW_CATS', true) ) {
+				$categories_list = get_the_category_list( esc_html__( ', ', 'groundwork-2' ) );
+				if ( $categories_list ) {
+					/* translators: 1: list of categories. */
+					printf( '<span class="cat-links">' . esc_html__( cfg('POST__CAT_LABEL', true).' %1$s', 'groundwork-2' ) . '</span>', $categories_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
 			}
-
 			/* translators: used between list items, there is a space after the comma */
-			$tags_list = get_the_tag_list( '', esc_html_x( ', ', 'list item separator', 'groundwork-2' ) );
-			if ( $tags_list ) {
-				/* translators: 1: list of tags. */
-				printf( '<span class="tags-links">' . esc_html__( 'Tagged %1$s', 'groundwork-2' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			if( cfg('POST__SHOW_TAGS', true) ) {
+				$tags_list = get_the_tag_list( '<ul><li>', '</li><li>', '</li></ul>' );
+				if ( $tags_list ) {
+					/* translators: 1: list of tags. */
+					printf( '<span class="tags-links">' . esc_html__( cfg('POST__TAG_LABEL', true).' %1$s', 'groundwork-2' ) . '</span>', $tags_list ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
 			}
 		}
 
