@@ -270,8 +270,7 @@ function my_theme_archive_title( $title ) {
     } elseif ( is_tax() ) {
         $title = single_term_title( '', false );
     }
-
-    return '<h1 class="u-pageTitle archives__title">'.$title.'</h1>';
+		return '<h1 class="page-title page-title--archives">'.$title.'</h1>';			
 }
 
 
