@@ -361,3 +361,27 @@ function be_dps_template_part( $output, $original_atts ) {
 	return $output;
 }
 add_action( 'display_posts_shortcode_output', 'be_dps_template_part', 10, 2 );
+
+
+
+function post_classes( $post ) {
+	$post_classes = '';
+	$post_classes .= ' ' . get_post_meta( $post->id, 'post-article-classes', true );
+	if( strpos( $post->post_content, '<!--more-->' ) ) {
+		$post_classes .= ' post-has-more';
+	}
+	return $post_classes;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* */
