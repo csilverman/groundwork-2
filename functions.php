@@ -270,7 +270,7 @@ function my_theme_archive_title( $title ) {
     } elseif ( is_tax() ) {
         $title = single_term_title( '', false );
     }
-		return '<h1 class="page-title page-title--archives">'.$title.'</h1>';			
+		return '<h1 class="page-title page-title--archives">'.$title.'</h1>';
 }
 
 
@@ -365,7 +365,8 @@ add_action( 'display_posts_shortcode_output', 'be_dps_template_part', 10, 2 );
 
 function post_classes( $post ) {
 	$post_classes = '';
-	$post_classes .= ' ' . get_post_meta( $post->id, 'post-article-classes', true );
+	$post_classes .= ' ' . get_post_meta( $post->ID, 'post-article-classes', true );
+
 	if( strpos( $post->post_content, '<!--more-->' ) ) {
 		$post_classes .= ' post-has-more';
 	}
