@@ -1,14 +1,13 @@
 <?php
 
-define('HOMEPAGE__CPT_ARCHIVE', 'note');
-define('NAV_CLASS', 'primary-menu');
 
-define('POST__SHOW_MOD_TIME', false);
-define('POST__SHOW_AUTHOR', false);
-define('POST__SHOW_CATS', false);
-define('POST__SHOW_TAGS', true);
-define('POST__TAG_LABEL', false);
+//	First thing to do: locate the _cfg.php file
+//	and load it. This will be located in the child theme.
 
+$cfg_path = get_stylesheet_directory() . '/_cfg.php';
+if( file_exists( $cfg_path) ) {
+	include( $cfg_path );
+}
 
 /**
  * groundwork-2 functions and definitions
